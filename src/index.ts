@@ -227,7 +227,10 @@ function createCompletionItemProvider({
                 ? dlv(prefixedItems, pth)
                 : dlv(items, pth)
             if (itms) {
-              return Object.keys(itms.children).map(x => itms.children[x].item)
+              if (itms.children) {
+                return Object.keys(itms.children).map(x => itms.children[x].item)
+              }
+              return [itms.item]
             }
           }
 
