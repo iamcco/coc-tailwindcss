@@ -2,18 +2,18 @@
   "name": "coc-tailwindcss",
   "displayName": "Tailwind CSS IntelliSense",
   "description": "Tailwind CSS class name completion",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "publisher": "iamcco",
   "engines": {
     "coc": "^0.0.46"
   },
   "keywords": [
+    "coc.nvim",
     "tailwind",
     "tailwindcss",
     "css",
     "intellisense",
-    "autocomplete",
-    "coc.nvim"
+    "autocomplete"
   ],
   "activationEvents": [
     "workspaceContains:**/{tailwind,tailwind.config,tailwind-config,.tailwindrc}.js"
