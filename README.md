@@ -1,6 +1,6 @@
 # Tailwind CSS IntelliSense
 
-> fork from [vscode-tailwindcss](https://github.com/bradlc/vscode-tailwindcss)
+> fork from [vscode-tailwindcss](https://github.com/bradlc/vscode-tailwindcss) v0.1.16
 
 [Tailwind CSS](https://tailwindcss.com/) class name completion for coc.nvim
 
@@ -8,6 +8,15 @@
 
 ```viml
 CocInstall coc-tailwindcss
+```
+
+coc-settings.json
+```json
+{
+  "tailwind.enable": true,
+  "tailwind.shortcut": "TWCSS",
+  "tailwind.priority": 99
+}
 ```
 
 ## Features
