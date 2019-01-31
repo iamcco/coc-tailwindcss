@@ -678,7 +678,7 @@ class TailwindIntellisense {
                 let hoverStr = {
                   value: '',
                   appendCodeblock: function(code, lang) {
-                    this.value = this.value + '```' + `${lang}\n${code}` + '```'
+                    this.value = this.value + '```' + `${lang}\n${code}\n` + '```'
                   },
                   toString: function() {
                     return this.value
