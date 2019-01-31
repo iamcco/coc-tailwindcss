@@ -1,0 +1,70 @@
+{
+  "name": "coc-tailwindcss",
+  "displayName": "Tailwind CSS IntelliSense",
+  "description": "Tailwind CSS class name completion",
+  "version": "0.0.1",
+  "publisher": "iamcco",
+  "engines": {
+    "coc": "^0.0.46"
+  },
+  "keywords": [
+    "tailwind",
+    "tailwindcss",
+    "css",
+    "intellisense",
+    "autocomplete",
+    "vscode"
+  ],
+  "activationEvents": [
+    "workspaceContains:**/{tailwind,tailwind.config,tailwind-config,.tailwindrc}.js"
+  ],
+  "main": "./lib/index.js",
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "tailwind",
+      "properties": {
+        "tailwind.enable": {
+          "type": "boolean",
+          "default": true
+        },
+        "tailwind.shortcut": {
+          "type": "string",
+          "default": "TWCSS"
+        },
+        "tailwind.priority": {
+          "type": "integer",
+          "default": 99
+        }
+      }
+    }
+  },
+  "preview": true,
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^10.12.20",
+    "coc.nvim": "^0.0.46",
+    "find-up": "^3.0.0",
+    "typescript": "^3.2.4",
+    "vscode": "^1.1.6"
+  },
+  "dependencies": {
+    "color": "^3.0.0",
+    "dlv": "^1.1.1",
+    "tailwind-class-names": "0.6.0"
+  },
+  "author": "iamcco <ooiss@qq.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/iamcco/coc-tailwindcss/blob/master/README.md",
+  "bugs": {
+    "url": "https://github.com/iamcco/coc-tailwindcss/issues",
+    "email": "ooiss@qq.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iamcco/coc-tailwindcss.git"
+  }
+}
