@@ -4,6 +4,8 @@
 
 [Tailwind CSS](https://tailwindcss.com/) class name completion for coc.nvim
 
+![screenshot](https://user-images.githubusercontent.com/5492542/52547452-c7e50c80-2e02-11e9-8214-e71e14b2cfb0.png)
+
 ## Install
 
 ```viml
