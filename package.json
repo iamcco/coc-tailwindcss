@@ -2,7 +2,7 @@
   "name": "coc-tailwindcss",
   "displayName": "Tailwind CSS IntelliSense",
   "description": "Tailwind CSS class name completion",
-  "version": "0.0.6",
+  "version": "0.2.0",
   "publisher": "iamcco",
   "engines": {
     "coc": "^0.0.46"
@@ -16,45 +16,27 @@
     "autocomplete"
   ],
   "activationEvents": [
-    "workspaceContains:{tailwind,tailwind.config,tailwind-config,.tailwindrc}.js"
+    "workspaceContains:**/{tailwind,tailwind.config,tailwind-config,.tailwindrc}.js"
   ],
   "main": "./lib/index.js",
   "contributes": {
-    "configuration": {
-      "type": "object",
-      "title": "tailwind",
-      "properties": {
-        "tailwind.enable": {
-          "type": "boolean",
-          "default": true
-        },
-        "tailwind.shortcut": {
-          "type": "string",
-          "default": "TWCSS"
-        },
-        "tailwind.priority": {
-          "type": "integer",
-          "default": 99
-        }
-      }
-    }
+    "configuration": {}
   },
   "preview": true,
   "scripts": {
-    "compile": "rm -rf ./lib && tsc -p ./",
+    "build": "rm -rf ./lib && tsc -p ./",
     "watch": "tsc -watch -p ./"
   },
   "devDependencies": {
-    "@types/node": "^10.12.20",
-    "coc.nvim": "^0.0.46",
-    "find-up": "^3.0.0",
-    "typescript": "^3.2.4",
-    "vscode": "^1.1.6"
+    "@types/node": "^11.13.5",
+    "coc.nvim": "^0.0.67",
+    "color": "^3.1.0",
+    "dlv": "^1.1.2",
+    "tmp": "0.0.33"
   },
   "dependencies": {
-    "color": "^3.0.0",
-    "dlv": "^1.1.1",
-    "tailwind-class-names": "0.6.0"
+    "tailwindcss-language-server": "0.0.1",
+    "vscode-languageserver-protocol": "^3.14.1"
   },
   "author": "iamcco <ooiss@qq.com>",
   "license": "MIT",
