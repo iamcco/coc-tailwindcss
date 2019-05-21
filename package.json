@@ -2,7 +2,7 @@
   "name": "coc-tailwindcss",
   "displayName": "Tailwind CSS IntelliSense",
   "description": "Tailwind CSS class name completion",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "publisher": "iamcco",
   "engines": {
     "coc": "^0.0.46"
@@ -16,7 +16,7 @@
     "autocomplete"
   ],
   "activationEvents": [
-    "workspaceContains:**/{tailwind,tailwind.config,tailwind-config,.tailwindrc}.js"
+    "*"
   ],
   "main": "./lib/index.js",
   "contributes": {
@@ -35,6 +35,7 @@
     "tmp": "0.0.33"
   },
   "dependencies": {
+    "fast-glob": "^2.2.7",
     "tailwindcss-language-server": "0.0.1",
     "vscode-languageserver-protocol": "^3.14.1"
   },

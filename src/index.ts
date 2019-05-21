@@ -10,11 +10,12 @@ import {
   TransportKind,
   Uri,
 } from 'coc.nvim'
-
 import {
   TextDocument,
   WorkspaceFolder
 } from 'vscode-languageserver-protocol';
+import fg from 'fast-glob';
+import { join } from 'path';
 
 const CONFIG_GLOB =
   '**/{tailwind,tailwind.config,tailwind-config,.tailwindrc}.js'
@@ -127,6 +128,16 @@ export async function activate() {
     if (!clients.has(folder.uri.toString())) {
       // placeholder
       clients.set(folder.uri.toString(), null)
+
+      try {
+        const configFiles = await fg<string>([join(Uri.parse(folder.uri).fsPath, CONFIG_GLOB), '!**/node_modules/**'])
+        if (!configFiles || configFiles.length === 0) {
+          return
+        }
+      } catch (error) {
+        outputChannel.append(`fg: ${error.stack || error.message || error}\n`)
+        return
+      }
 
       let debugOptions = {
         execArgv: ['--nolazy', `--inspect=${6011 + clients.size}`]
