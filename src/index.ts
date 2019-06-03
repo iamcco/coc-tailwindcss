@@ -94,7 +94,10 @@ function getOuterMostWorkspaceFolder(folder: WorkspaceFolder): WorkspaceFolder {
       uri = uri + '/'
     }
     if (uri.startsWith(element)) {
-      return Workspace.getWorkspaceFolder(element)!
+      const workdir = Workspace.getWorkspaceFolder(element)
+      if (workdir) {
+        return workdir
+      }
     }
   }
   return folder
