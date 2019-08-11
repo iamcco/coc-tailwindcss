@@ -2,7 +2,7 @@
   "name": "coc-tailwindcss",
   "displayName": "Tailwind CSS IntelliSense",
   "description": "Tailwind CSS class name completion",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "publisher": "iamcco",
   "engines": {
     "coc": "^0.0.46"
