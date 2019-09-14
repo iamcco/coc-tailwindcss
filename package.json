@@ -2,7 +2,7 @@
   "name": "coc-tailwindcss",
   "displayName": "Tailwind CSS IntelliSense",
   "description": "Tailwind CSS class name completion",
-  "version": "0.2.3",
+  "version": "0.2.5",
   "publisher": "iamcco",
   "engines": {
     "coc": "^0.0.46"
@@ -29,13 +29,13 @@
   },
   "devDependencies": {
     "@types/node": "^11.13.5",
-    "coc.nvim": "^0.0.67",
+    "coc.nvim": "^0.0.73",
     "color": "^3.1.0",
     "dlv": "^1.1.2",
     "tmp": "0.0.33"
   },
   "dependencies": {
-    "fast-glob": "^2.2.7",
+    "fast-glob": "^3.0.4",
     "tailwindcss-language-server": "0.0.1",
     "vscode-languageserver-protocol": "^3.14.1"
   },

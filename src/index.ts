@@ -135,7 +135,7 @@ export async function activate() {
       clients.set(folder.uri.toString(), null)
 
       try {
-        const configFiles = await fg<string>([join(Uri.parse(folder.uri).fsPath, CONFIG_GLOB), '!**/node_modules/**'])
+        const configFiles = await fg([join(Uri.parse(folder.uri).fsPath, CONFIG_GLOB), '!**/node_modules/**'])
         if (!configFiles || configFiles.length === 0) {
           return
         }
