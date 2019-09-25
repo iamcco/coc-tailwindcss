@@ -55,6 +55,7 @@ export const HTML_LANGUAGES: string[] = [
   'slim',
   'svelte',
   'twig',
+  'html.twig',
   'vue',
   ...JS_LANGUAGES
 ]
