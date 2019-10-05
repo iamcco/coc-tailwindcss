@@ -37,7 +37,9 @@ export const JS_LANGUAGES: string[] = [
 export const HTML_LANGUAGES: string[] = [
   'blade',
   'edge',
+  'eelixir',
   'ejs',
+  'elixir',
   'erb',
   'eruby',
   'haml',
