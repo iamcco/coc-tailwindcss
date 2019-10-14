@@ -362,7 +362,7 @@ jsonfile@^4.0.0:
   optionalDependencies:
     graceful-fs "^4.1.6"
 
-lodash@^4.17.14:
+lodash@^4.17.11, lodash@^4.17.14:
   version "4.17.15"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
   integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
@@ -557,11 +557,6 @@ strip-json-comments@~2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
   integrity sha1-PFMZQukIwml8DsNEhYwobHygpgo=
-
-tailwindcss-language-server@0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/tailwindcss-language-server/-/tailwindcss-language-server-0.0.1.tgz#a4f24cb05cc6b36fc73517bcc8c6c6c80c8c6cde"
-  integrity sha512-lMoncp8ICeUA1kLVaiKARRUKQxRndKtIelydoMgg3P2ZjAIfcptN8Nin848+VClr2wGoM3+9RZ71sDG1YrnX1g==
 
 tar@^4.4.10:
   version "4.4.10"

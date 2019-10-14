@@ -2,7 +2,7 @@
   "name": "coc-tailwindcss",
   "displayName": "Tailwind CSS IntelliSense",
   "description": "Tailwind CSS class name completion",
-  "version": "0.2.5",
+  "version": "0.3.0",
   "publisher": "iamcco",
   "engines": {
     "coc": "^0.0.46"
@@ -20,7 +20,80 @@
   ],
   "main": "./lib/index.js",
   "contributes": {
-    "configuration": {}
+    "configuration": {
+      "type": "object",
+      "title": "Tailwind CSS IntelliSense configuration",
+      "properties": {
+        "tailwindCSS.trace.server": {
+          "type": "string",
+          "default": "off",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "description": "Trace level of tailwindCSS language server"
+        },
+        "tailwindCSS.emmetCompletions": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable class name completions for Emmet-style syntax"
+        },
+        "tailwindCSS.cssLanguages": {
+          "type": "array",
+          "default": [
+            "css",
+            "less",
+            "postcss",
+            "sass",
+            "scss",
+            "stylus",
+            "vue"
+          ],
+          "description": "css languages"
+        },
+        "tailwindCSS.jsLanguages": {
+          "type": "array",
+          "default": [
+            "javascript",
+            "javascriptreact",
+            "reason",
+            "typescriptreact"
+          ],
+          "description": "javascript languages"
+        },
+        "tailwindCSS.htmlLanguages": {
+          "type": "array",
+          "default": [
+            "blade",
+            "edge",
+            "eelixir",
+            "ejs",
+            "elixir",
+            "erb",
+            "eruby",
+            "haml",
+            "handlebars",
+            "html",
+            "HTML (EEx)",
+            "HTML (Eex)",
+            "html.twig",
+            "jade",
+            "leaf",
+            "markdown",
+            "njk",
+            "nunjucks",
+            "php",
+            "razor",
+            "slim",
+            "svelte",
+            "twig",
+            "vue"
+          ],
+          "description": "html languages"
+        }
+      }
+    }
   },
   "preview": true,
   "scripts": {
@@ -36,7 +109,6 @@
   },
   "dependencies": {
     "fast-glob": "^3.0.4",
-    "tailwindcss-language-server": "0.0.1",
     "vscode-languageserver-protocol": "^3.14.1"
   },
   "author": "iamcco <ooiss@qq.com>",

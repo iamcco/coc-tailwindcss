@@ -9,60 +9,20 @@ import {
   LanguageClientOptions,
   TransportKind,
   Uri,
+  workspace,
+  ExtensionContext,
 } from 'coc.nvim'
 import {
   TextDocument,
   WorkspaceFolder
 } from 'vscode-languageserver-protocol';
 import fg from 'fast-glob';
-import { join } from 'path';
+import { join, resolve } from 'path';
 
 const CONFIG_GLOB =
   '**/{tailwind,tailwind.config,tailwind-config,.tailwindrc}.js'
-export const CSS_LANGUAGES: string[] = [
-  'css',
-  'less',
-  'postcss',
-  'sass',
-  'scss',
-  'stylus',
-  'vue'
-]
-export const JS_LANGUAGES: string[] = [
-  'javascript',
-  'javascriptreact',
-  'reason',
-  'typescriptreact'
-]
-export const HTML_LANGUAGES: string[] = [
-  'blade',
-  'edge',
-  'eelixir',
-  'ejs',
-  'elixir',
-  'erb',
-  'eruby',
-  'haml',
-  'handlebars',
-  'html',
-  'HTML (EEx)',
-  'HTML (Eex)',
-  'jade',
-  'leaf',
-  'markdown',
-  'njk',
-  'nunjucks',
-  'php',
-  'razor',
-  'slim',
-  'svelte',
-  'twig',
-  'vue',
-  ...JS_LANGUAGES
-]
-export const LANGUAGES: string[] = [...CSS_LANGUAGES, ...HTML_LANGUAGES].filter(
-  (val, index, arr) => arr.indexOf(val) === index
-)
+
+let LANGUAGES: string[] = []
 
 let defaultClient: LanguageClient
 let clients: Map<string, LanguageClient> = new Map()
@@ -107,11 +67,17 @@ function getOuterMostWorkspaceFolder(folder: WorkspaceFolder): WorkspaceFolder {
   return folder
 }
 
-export async function activate() {
-  let module = require.resolve('tailwindcss-language-server')
+export async function activate(context: ExtensionContext) {
+  let module = resolve(context.extensionPath, 'lsp', 'tailwindcss-language-server', 'dist', 'index.js')
   let outputChannel: OutputChannel = Workspace.createOutputChannel(
     'tailwindcss-language-server'
   )
+  const config = workspace.getConfiguration('tailwindCSS')
+  LANGUAGES = [
+    ...config.get<string[]>('cssLanguages', []),
+    ...config.get<string[]>('htmlLanguages', []),
+    ...config.get<string[]>('jsLanguages', [])
+  ]
 
   async function didOpenTextDocument(document: TextDocument): Promise<void> {
     let uri = Uri.parse(document.uri)
@@ -167,7 +133,7 @@ export async function activate() {
         }
       }
       let client = new LanguageClient(
-        'tailwindcss-language-server',
+        'tailwindCSS',
         'Tailwind CSS Language Server',
         serverOptions,
         clientOptions
