@@ -2,7 +2,7 @@
   "name": "coc-tailwindcss",
   "displayName": "Tailwind CSS IntelliSense",
   "description": "Tailwind CSS class name completion",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "publisher": "iamcco",
   "engines": {
     "coc": "^0.0.46"
@@ -18,7 +18,7 @@
   "activationEvents": [
     "*"
   ],
-  "main": "./lib/index.js",
+  "main": "./out/index.js",
   "contributes": {
     "configuration": {
       "type": "object",
@@ -97,19 +97,21 @@
   },
   "preview": true,
   "scripts": {
-    "build": "rm -rf ./lib && tsc -p ./",
-    "watch": "tsc -watch -p ./"
+    "build": "rm -rf ./out && webpack",
+    "watch": "webpack -w"
   },
   "devDependencies": {
     "@types/node": "^11.13.5",
     "coc.nvim": "^0.0.73",
     "color": "^3.1.0",
     "dlv": "^1.1.2",
-    "tmp": "0.0.33"
-  },
-  "dependencies": {
     "fast-glob": "^3.0.4",
-    "vscode-languageserver-protocol": "^3.14.1"
+    "tmp": "0.0.33",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.6.4",
+    "vscode-languageserver-protocol": "^3.14.1",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9"
   },
   "author": "iamcco <ooiss@qq.com>",
   "license": "MIT",
