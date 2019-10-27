@@ -3,10 +3,10 @@ const path = require('path')
 /** @type {import('webpack').Configuration} */
 module.exports = {
   entry: {
-    index: './src/index.ts',
+    index: './src/index.ts'
   },
   target: 'node',
-  mode: 'none',
+  mode: 'production',
   resolve: {
     mainFields: ['module', 'main'],
     extensions: ['.js', '.ts']
