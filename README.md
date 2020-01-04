@@ -14,11 +14,11 @@ CocInstall coc-tailwindcss
 
 ## Settings
 
-- `tailwindCSS.trace.server` Trace level of tailwindCSS language server, defalut: `off`
-- `tailwindCSS.emmetCompletions` Enable class name completions for Emmet-style syntax, defalut: `false`
-- `tailwindCSS.cssLanguages` css languages completion support, defalut: `[ "css", "less", "postcss", "sass", "scss", "stylus", "vue" ]`
-- `tailwindCSS.jsLanguages` javascript languages completion support, defalut: `[ "javascript", "javascriptreact", "reason", "typescriptreact" ]`
-- `tailwindCSS.htmlLanguages` html languages completion support, defalut: `[ "blade", "edge", "eelixir", "ejs", "elixir", "erb", "eruby", "haml", "handlebars", "html", "HTML (EEx)", "HTML (Eex)", "html.twig", "jade", "leaf", "markdown", "njk", "nunjucks", "php", "razor", "slim", "svelte", "twig", "vue" ]`
+- `tailwindCSS.trace.server` Trace level of tailwindCSS language server, default: `off`
+- `tailwindCSS.emmetCompletions` Enable class name completions for Emmet-style syntax, default: `false`
+- `tailwindCSS.cssLanguages` css languages completion support, default: `[ "css", "less", "postcss", "sass", "scss", "stylus", "vue" ]`
+- `tailwindCSS.jsLanguages` javascript languages completion support, default: `[ "javascript", "javascriptreact", "reason", "typescriptreact" ]`
+- `tailwindCSS.htmlLanguages` html languages completion support, default: `[ "blade", "edge", "eelixir", "ejs", "elixir", "erb", "eruby", "haml", "handlebars", "html", "HTML (EEx)", "HTML (Eex)", "html.twig", "jade", "leaf", "markdown", "njk", "nunjucks", "php", "razor", "slim", "svelte", "twig", "vue" ]`
 
 
 ## Features
