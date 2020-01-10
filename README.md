@@ -4,7 +4,7 @@
 
 [Tailwind CSS](https://tailwindcss.com/) class name completion for coc.nvim
 
-![screenshot](https://user-images.githubusercontent.com/5492542/52547452-c7e50c80-2e02-11e9-8214-e71e14b2cfb0.png)
+![image](https://user-images.githubusercontent.com/5492542/72122448-e6e47980-3398-11ea-908f-820a64b16b47.png)
 
 ## Install
 
@@ -12,13 +12,35 @@
 CocInstall coc-tailwindcss
 ```
 
+Create tailwindCSS configuration in your project
+
+> this extension need the configuration exists in your project
+
+``` bash
+tailwind init
+```
+
 ## Settings
 
 - `tailwindCSS.trace.server` Trace level of tailwindCSS language server, default: `off`
 - `tailwindCSS.emmetCompletions` Enable class name completions for Emmet-style syntax, default: `false`
-- `tailwindCSS.cssLanguages` css languages completion support, default: `[ "css", "less", "postcss", "sass", "scss", "stylus", "vue" ]`
-- `tailwindCSS.jsLanguages` javascript languages completion support, default: `[ "javascript", "javascriptreact", "reason", "typescriptreact" ]`
-- `tailwindCSS.htmlLanguages` html languages completion support, default: `[ "blade", "edge", "eelixir", "ejs", "elixir", "erb", "eruby", "haml", "handlebars", "html", "HTML (EEx)", "HTML (Eex)", "html.twig", "jade", "leaf", "markdown", "njk", "nunjucks", "php", "razor", "slim", "svelte", "twig", "vue" ]`
+- `tailwindCSS.cssLanguages` css languages completion support, default:
+
+  ``` jsonc
+  [ "css", "less", "postcss", "sass", "scss", "stylus", "vue" ]
+  ```
+
+- `tailwindCSS.jsLanguages` javascript languages completion support, default:
+
+  ``` jsonc
+  [ "javascript", "javascriptreact", "reason", "typescriptreact" ]
+  ```
+
+- `tailwindCSS.htmlLanguages` html languages completion support, default:
+
+  ``` jsonc
+  [ "blade", "edge", "eelixir", "ejs", "elixir", "erb", "eruby", "haml", "handlebars", "html", "HTML (EEx)", "HTML (Eex)", "html.twig", "jade", "leaf", "markdown", "njk", "nunjucks", "php", "razor", "slim", "svelte", "twig", "vue" ]
+  ```
 
 
 ## Features
