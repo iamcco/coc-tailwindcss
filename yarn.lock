@@ -2626,6 +2626,11 @@ run-queue@^1.0.0, run-queue@^1.0.3:
   dependencies:
     aproba "^1.1.1"
 
+rustywind@^0.6.5:
+  version "0.6.5"
+  resolved "https://registry.yarnpkg.com/rustywind/-/rustywind-0.6.5.tgz#406796385dd9e9ce1314670a9d6332e1dfda9dd9"
+  integrity sha512-1xMA3J/bLIsTvGmmCGXP0zwmfIvAI6R5+UNBNmZH/jB9Ba6wumzF8c6sosGk7lIjQeTfnO/F/CUoDPOGRuYNqg==
+
 safe-buffer@^5.0.1, safe-buffer@^5.1.0, safe-buffer@^5.1.1, safe-buffer@^5.1.2, safe-buffer@~5.2.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.2.0.tgz#b74daec49b1148f88c64b68d49b1e815c1f2f519"
