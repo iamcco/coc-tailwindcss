@@ -18,6 +18,7 @@ import {
 } from 'vscode-languageserver-protocol';
 import fg from 'fast-glob';
 import { join, resolve } from 'path';
+import {activateHeadwind} from './headwind';
 
 const CONFIG_GLOB =
   '**/{tailwind,tailwind.config,tailwind-config,.tailwindrc}.js'
@@ -111,6 +112,9 @@ export async function activate(context: ExtensionContext) {
         outputChannel.append(`fg: ${error.stack || error.message || error}\n`)
         return
       }
+
+      // register headwind
+      activateHeadwind(context)
 
       let debugOptions = {
         execArgv: ['--nolazy', `--inspect=${6011 + clients.size}`]
