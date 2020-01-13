@@ -1,3 +1,5 @@
+import {OutputChannel} from "coc.nvim";
+
 /**
  * Sorts a string of CSS classes according to a predefined order.
  * @param classString The string to sort
@@ -34,3 +36,19 @@ const sortClassArray = (
 const removeDuplicates = (classArray: string[]): string[] => [
   ...new Set(classArray)
 ];
+
+let outputChannel: OutputChannel | undefined
+
+export const logger = {
+  init(ch: OutputChannel) {
+    outputChannel = ch
+  },
+
+  getLog(name: string) {
+    return (message: string) => {
+      if (outputChannel) {
+        outputChannel.appendLine(`[${name}]: ${message}`)
+      }
+    }
+  }
+}

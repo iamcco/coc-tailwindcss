@@ -2,8 +2,19 @@
   "name": "coc-tailwindcss",
   "displayName": "Tailwind CSS IntelliSense",
   "description": "Tailwind CSS class name completion",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "publisher": "iamcco",
+  "author": "iamcco <ooiss@qq.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/iamcco/coc-tailwindcss/blob/master/README.md",
+  "bugs": {
+    "url": "https://github.com/iamcco/coc-tailwindcss/issues",
+    "email": "ooiss@qq.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iamcco/coc-tailwindcss.git"
+  },
   "engines": {
     "coc": "^0.0.46"
   },
@@ -1336,29 +1347,20 @@
     "build": "rm -rf ./out && webpack",
     "watch": "webpack -w"
   },
+  "dependencies": {
+    "rustywind": "^0.6.5"
+  },
   "devDependencies": {
     "@types/node": "^11.13.5",
     "coc.nvim": "^0.0.73",
     "color": "^3.1.0",
     "dlv": "^1.1.2",
     "fast-glob": "^3.0.4",
-    "rustywind": "^0.6.5",
     "tmp": "0.0.33",
     "ts-loader": "^6.2.1",
     "typescript": "^3.6.4",
     "vscode-languageserver-protocol": "^3.14.1",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.9"
-  },
-  "author": "iamcco <ooiss@qq.com>",
-  "license": "MIT",
-  "homepage": "https://github.com/iamcco/coc-tailwindcss/blob/master/README.md",
-  "bugs": {
-    "url": "https://github.com/iamcco/coc-tailwindcss/issues",
-    "email": "ooiss@qq.com"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/iamcco/coc-tailwindcss.git"
   }
 }

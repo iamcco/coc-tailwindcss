@@ -12,7 +12,8 @@ module.exports = {
     extensions: ['.js', '.ts']
   },
   externals: {
-    'coc.nvim': 'commonjs coc.nvim'
+    'coc.nvim': 'commonjs coc.nvim',
+    'rustywind': 'commonjs rustywind'
   },
   module: {
     rules: [
