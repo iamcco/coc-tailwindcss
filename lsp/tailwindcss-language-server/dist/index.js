@@ -6148,14 +6148,14 @@ module.exports = (function(e, t) {
           end: t
         };
         const n = e.getText(r);
-        if (!/\bclass(Name)?=['"][^'"]*$/.test(n)) return null;
+        if (!/\bclass(Name)?[= ]['"][^'"]*$/.test(n)) return null;
         const i = {
           start: { line: Math.max(t.line - 5, 0), character: 0 },
           end: { line: t.line + 1, character: t.character }
         };
         const o = e.getText(i);
         let a = n + o.substr(n.length).match(/^([^"' ]*)/)[0];
-        let s = a.match(/\bclass(Name)?=["']([^"']*)$/);
+        let s = a.match(/\bclass(Name)?[= ]["']([^"']*)$/);
         if (s && s[2]) {
           let e = s[2].split(" ").pop();
           if (!e) return null;
@@ -6390,7 +6390,7 @@ module.exports = (function(e, t) {
       function getClassListsInHtmlRange(e, t) {
         let r = e.getText(t);
         let n = t ? e.offsetAt(t.start) : 0;
-        let i = find(/\bclass(Name)?=(['"{])/g, r);
+        let i = find(/\bclass(Name)?[= ](['"{])/g, r);
         return flatten(
           i.map(t => {
             if (t[2] === "{") {
@@ -6880,7 +6880,7 @@ module.exports = (function(e, t) {
           let e = /@apply\s+[^;]*$/.test(o);
           if (e || !n) return e;
         }
-        let a = find(/\bclass(Name)?=(['"{])/g, o);
+        let a = find(/\bclass(Name)?[= ](['"{])/g, o);
         if (a.length > 0) {
           let e = a[a.length - 1];
           let t = e.index + 7 + (e[1] ? e[1].length : 0);
