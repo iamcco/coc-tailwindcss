@@ -28,9 +28,9 @@ const sortClassArray = (
   sortOrder: string[]
 ): string[] => [
   ...classArray
-  .filter(el => sortOrder.indexOf(el) !== -1) // take the classes that are in the sort order
-  .sort((a, b) => sortOrder.indexOf(a) - sortOrder.indexOf(b)), // and sort them
-  ...classArray.filter(el => sortOrder.indexOf(el) === -1) // prepend the classes that were not in the sort order
+  .filter(el => sortOrder.some(c => el.endsWith(c))) // take the classes that are in the sort order
+  .sort((a, b) => sortOrder.findIndex(c => a.endsWith(c)) - sortOrder.findIndex(c => b.endsWith(c))), // and sort them
+  ...classArray.filter(el => !sortOrder.some(c => el.endsWith(c))) // prepend the classes that were not in the sort order
 ];
 
 const removeDuplicates = (classArray: string[]): string[] => [
