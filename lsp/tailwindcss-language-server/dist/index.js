@@ -6148,7 +6148,7 @@ module.exports = (function(e, t) {
           end: t
         };
         const n = e.getText(r);
-        if (!/\bclass(Name)?[= ](?:\[%tw )?["']([^"']*)$/.test(n)) return null;
+        if (!/\bclass(Name)?[= ](?:\[%tw )?["'][^"']*$/.test(n)) return null;
         const i = {
           start: { line: Math.max(t.line - 5, 0), character: 0 },
           end: { line: t.line + 1, character: t.character }
@@ -6390,7 +6390,7 @@ module.exports = (function(e, t) {
       function getClassListsInHtmlRange(e, t) {
         let r = e.getText(t);
         let n = t ? e.offsetAt(t.start) : 0;
-        let i = find(/\bclss(Name)?[= ](?:\[%tw )?(['"{])/g, r);
+        let i = find(/\bclass(Name)?[= ](?:\[%tw )?(['"{])/g, r);
         return flatten(
           i.map(t => {
             if (t[2] === "{") {
@@ -6904,10 +6904,10 @@ module.exports = (function(e, t) {
                 o.substr(t).replace(/(['"])[^'"]*\1/g, "")
               );
             }
+          } else if (/%tw ['"]/.test(o.substr(t))) {
+            return o.substr(t + 5).indexOf(e[2]) === -1;
           } else {
-            // TODO is this correct?
-            // return o.substr(t).indexOf(e[2]) === -1;
-            return true;
+            return o.substr(t).indexOf(e[2]) === -1;
           }
         }
         return false;
@@ -49587,4 +49587,3 @@ module.exports = (function(e, t) {
     })();
   }
 );
-
