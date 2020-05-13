@@ -1347,8 +1347,10 @@
   },
   "preview": true,
   "scripts": {
-    "build": "rm -rf ./out && webpack",
-    "watch": "webpack -w"
+    "clean": "rm -rf ./out",
+    "build": "webpack",
+    "watch": "webpack -w",
+    "prepare": "npm-run-all clean build"
   },
   "dependencies": {
     "rustywind": "^0.6.5"
@@ -1359,6 +1361,7 @@
     "color": "^3.1.0",
     "dlv": "^1.1.2",
     "fast-glob": "^3.0.4",
+    "npm-run-all": "4.1.5",
     "tmp": "0.0.33",
     "ts-loader": "^6.2.1",
     "typescript": "^3.6.4",
