@@ -24,7 +24,7 @@ Create tailwindCSS configuration in your project
 > this extension need the configuration exists in your project
 
 ``` bash
-tailwind init
+npx tailwindcss init
 ```
 
 ## Settings
