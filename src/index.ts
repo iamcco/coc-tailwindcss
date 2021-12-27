@@ -22,9 +22,62 @@ import fg from 'fast-glob';
 import { join, resolve } from 'path';
 import {activateHeadwind} from './headwind';
 
-export default function isObject(variable: any): boolean {
+// REF: https://github.com/tailwindlabs/tailwindcss-intellisense/blob/master/packages/tailwindcss-language-service/src/util/isObject.ts
+function isObject(variable: any): boolean {
   return Object.prototype.toString.call(variable) === "[object Object]";
 }
+// REF: https://github.com/tailwindlabs/tailwindcss-intellisense/blob/master/packages/tailwindcss-language-service/src/util/array.ts
+function dedupe<T>(arr: Array<T>): Array<T> {
+  return arr.filter((value, index, self) => self.indexOf(value) === index)
+}
+// REF: https://github.com/tailwindlabs/tailwindcss-intellisense/blob/master/packages/tailwindcss-language-service/src/util/languages.ts
+const htmlLanguages = [
+  'aspnetcorerazor',
+  'astro',
+  'astro-markdown',
+  'blade',
+  'django-html',
+  'edge',
+  'ejs',
+  'erb',
+  'gohtml',
+  'GoHTML',
+  'haml',
+  'handlebars',
+  'hbs',
+  'html',
+  'HTML (Eex)',
+  'HTML (EEx)',
+  'html-eex',
+  'jade',
+  'leaf',
+  'liquid',
+  'markdown',
+  'mdx',
+  'mustache',
+  'njk',
+  'nunjucks',
+  'phoenix-heex',
+  'php',
+  'razor',
+  'slim',
+  'twig',
+]
+// REF: https://github.com/tailwindlabs/tailwindcss-intellisense/blob/master/packages/tailwindcss-language-service/src/util/languages.ts
+const cssLanguages = ['css', 'less', 'postcss', 'sass', 'scss', 'stylus', 'sugarss']
+// REF: https://github.com/tailwindlabs/tailwindcss-intellisense/blob/master/packages/tailwindcss-language-service/src/util/languages.ts
+const jsLanguages = [
+  'javascript',
+  'javascriptreact',
+  'reason',
+  'rescript',
+  'typescript',
+  'typescriptreact',
+]
+// REF: https://github.com/tailwindlabs/tailwindcss-intellisense/blob/master/packages/tailwindcss-language-service/src/util/languages.ts
+export const specialLanguages = ['vue', 'svelte']
+
+const defaultLanguages = [...cssLanguages, ...htmlLanguages, ...jsLanguages, ...specialLanguages]
 
 export type ConfigurationScope =
   | Uri
@@ -35,9 +88,8 @@ export type ConfigurationScope =
 const CONFIG_GLOB =
   "**/{tailwind,tailwind.config,tailwind-config,.tailwindrc}.{js,cjs}";
 
-let LANGUAGES: string[] = []
-
 let defaultClient: LanguageClient
+let languages: Map<string, string[]> = new Map()
 let clients: Map<string, LanguageClient> = new Map()
 
 let _sortedWorkspaceFolders: string[] | undefined
@@ -110,20 +162,11 @@ export async function activate(context: ExtensionContext) {
     })
   );
   const config = workspace.getConfiguration('tailwindCSS')
-  LANGUAGES = [
-    ...config.get<string[]>('cssLanguages', []),
-    ...config.get<string[]>('htmlLanguages', []),
-    ...config.get<string[]>('jsLanguages', [])
-  ]
 
   async function didOpenTextDocument(document: TextDocument): Promise<void> {
     let uri = Uri.parse(document.uri)
-    if (
-      uri.scheme !== 'file' ||
-      LANGUAGES.indexOf(document.languageId) === -1
-    ) {
-      return
-    }
+
+    if (uri.scheme !== 'file') return
 
     let folder = Workspace.getWorkspaceFolder(document.uri)
     // Files outside a folder can't be handled. This might depend on the language.
@@ -138,6 +181,13 @@ export async function activate(context: ExtensionContext) {
     if (!clients.has(folder.uri.toString())) {
       // placeholder
       clients.set(folder.uri.toString(), null)
+
+      if (!languages.has(folder.uri.toString())) {
+        languages.set(
+          folder.uri.toString(),
+          dedupe([...defaultLanguages, ...Object.keys(getUserLanguages(folder))])
+        )
+      }
 
       try {
         const configFiles = await fg([join(Uri.parse(folder.uri).fsPath, CONFIG_GLOB), '!**/node_modules/**'])
@@ -175,7 +225,7 @@ export async function activate(context: ExtensionContext) {
       }
 
       let clientOptions: LanguageClientOptions = {
-        documentSelector: LANGUAGES.map(language => ({
+        documentSelector: languages.get(folder.uri.toString()).map(language => ({
           scheme: 'file',
           language,
           pattern: `${Uri.parse(folder.uri).fsPath}/**/*`
