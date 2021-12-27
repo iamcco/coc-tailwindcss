@@ -9,6 +9,7 @@ import {
   LanguageClientOptions,
   TransportKind,
   Uri,
+  commands,
   workspace,
   ExtensionContext,
 } from 'coc.nvim'
@@ -100,6 +101,13 @@ export async function activate(context: ExtensionContext) {
   let outputChannel: OutputChannel = Workspace.createOutputChannel(
     'tailwindcss-language-server'
   )
+  context.subscriptions.push(
+    commands.registerCommand("tailwindCSS.showOutput", () => {
+      if (outputChannel) {
+        outputChannel.show();
+      }
+    })
+  );
   const config = workspace.getConfiguration('tailwindCSS')
   LANGUAGES = [
     ...config.get<string[]>('cssLanguages', []),

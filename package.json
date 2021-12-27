@@ -33,6 +33,10 @@
   "contributes": {
     "commands": [
       {
+        "command": "tailwindCSS.showOutput",
+        "title": "Tailwind CSS: Show Output"
+      },
+      {
         "command": "tailwindCSS.headwind.sortTailwindClasses",
         "title": "Headwind: Sort Tailwind CSS Classes"
       },
