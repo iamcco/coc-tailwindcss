@@ -12,6 +12,7 @@ import {
   commands,
   workspace,
   ExtensionContext,
+  ServerOptions,
 } from 'coc.nvim'
 import {
   TextDocument,
@@ -156,13 +157,23 @@ export async function activate(context: ExtensionContext) {
         tailwindCSS: Workspace.getConfiguration("tailwindCSS"),
       };
 
-      let debugOptions = {
-        execArgv: ['--nolazy', `--inspect=${6011 + clients.size}`]
+      let inspectPort = configuration.tailwindCSS.get('inspectPort', null)
+
+      let serverOptions: ServerOptions = {
+        run: {
+          module,
+          transport: TransportKind.ipc,
+          options: { execArgv: inspectPort === null ? [] : [`--inspect=${inspectPort}`] },
+        },
+        debug: {
+          module,
+          transport: TransportKind.ipc,
+          options: {
+            execArgv: ['--nolazy', `--inspect=${6011 + clients.size}`],
+          },
+        },
       }
-      let serverOptions = {
-        run: { module, transport: TransportKind.ipc },
-        debug: { module, transport: TransportKind.ipc, options: debugOptions }
-      }
+
       let clientOptions: LanguageClientOptions = {
         documentSelector: LANGUAGES.map(language => ({
           scheme: 'file',
