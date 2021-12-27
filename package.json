@@ -62,7 +62,7 @@
         "tailwindCSS.emmetCompletions": {
           "type": "boolean",
           "default": false,
-          "description": "Enable class name completions for Emmet-style syntax"
+          "description": "Enable class name completions when using Emmet-style syntax, for example `div.bg-red-500.uppercase`"
         },
         "tailwindCSS.includeLanguages": {
           "type": "object",
