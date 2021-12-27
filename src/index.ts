@@ -32,7 +32,7 @@ export type ConfigurationScope =
   | { uri?: Uri; languageId: string };
 
 const CONFIG_GLOB =
-  '**/{tailwind,tailwind.config,tailwind-config,.tailwindrc}.js'
+  "**/{tailwind,tailwind.config,tailwind-config,.tailwindrc}.{js,cjs}";
 
 let LANGUAGES: string[] = []
 
