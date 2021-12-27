@@ -20,6 +20,16 @@ import fg from 'fast-glob';
 import { join, resolve } from 'path';
 import {activateHeadwind} from './headwind';
 
+export default function isObject(variable: any): boolean {
+  return Object.prototype.toString.call(variable) === "[object Object]";
+}
+
+export type ConfigurationScope =
+  | Uri
+  | TextDocument
+  | WorkspaceFolder
+  | { uri?: Uri; languageId: string };
+
 const CONFIG_GLOB =
   '**/{tailwind,tailwind.config,tailwind-config,.tailwindrc}.js'
 
@@ -68,8 +78,25 @@ function getOuterMostWorkspaceFolder(folder: WorkspaceFolder): WorkspaceFolder {
   return folder
 }
 
+function getUserLanguages(folder?: WorkspaceFolder): Record<string, string> {
+  const langs = Workspace.getConfiguration(
+    "tailwindCSS",
+    folder.uri.toString()
+  ).includeLanguages;
+  return isObject(langs) ? langs : {};
+}
+
 export async function activate(context: ExtensionContext) {
-  let module = resolve(context.extensionPath, 'lsp', 'tailwindcss-language-server', 'dist', 'index.js')
+  let module = context.asAbsolutePath(
+    join(
+      "node_modules",
+      "@tailwindcss",
+      "language-server",
+      "bin",
+      "tailwindcss-language-server"
+    )
+  );
+
   let outputChannel: OutputChannel = Workspace.createOutputChannel(
     'tailwindcss-language-server'
   )
@@ -116,6 +143,11 @@ export async function activate(context: ExtensionContext) {
       // register headwind
       activateHeadwind(context)
 
+      let configuration = {
+        edidor: Workspace.getConfiguration("editor"),
+        tailwindCSS: Workspace.getConfiguration("tailwindCSS"),
+      };
+
       let debugOptions = {
         execArgv: ['--nolazy', `--inspect=${6011 + clients.size}`]
       }
@@ -134,7 +166,31 @@ export async function activate(context: ExtensionContext) {
         outputChannel: outputChannel,
         synchronize: {
           fileEvents: Workspace.createFileSystemWatcher(CONFIG_GLOB)
-        }
+        },
+        middleware: {
+          workspace: {
+            configuration: (params) => {
+              return params.items.map(({ section, scopeUri }) => {
+                let scope: ConfigurationScope = folder;
+                if (scopeUri) {
+                  let doc = Workspace.textDocuments.find(
+                    (doc) => doc.uri.toString() === scopeUri
+                  );
+                  if (doc) {
+                    scope = {
+                      languageId: doc.languageId,
+                    };
+                  }
+                }
+                return Workspace.getConfiguration(section);
+              });
+            },
+          },
+        },
+        initializationOptions: {
+          userLanguages: getUserLanguages(folder),
+          configuration,
+        },
       }
       let client = new LanguageClient(
         'tailwindCSS',
