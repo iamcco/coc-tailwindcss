@@ -258,7 +258,6 @@ export async function activate(context: ExtensionContext) {
         },
         initializationOptions: {
           userLanguages: getUserLanguages(folder),
-          configuration,
         },
       }
       let client = new LanguageClient(
