@@ -1459,7 +1459,7 @@
     "prepare": "npm-run-all clean build"
   },
   "dependencies": {
-    "@tailwindcss/language-server": "^0.0.5",
+    "@tailwindcss/language-server": "^0.0.7",
     "rustywind": "^0.6.5"
   },
   "devDependencies": {
