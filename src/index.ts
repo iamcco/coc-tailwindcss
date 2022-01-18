@@ -20,6 +20,7 @@ import {
 } from 'vscode-languageserver-protocol';
 import fg from 'fast-glob';
 import { join, resolve } from 'path';
+import { existsSync } from "fs";
 import {activateHeadwind} from './headwind';
 
 // REF: https://github.com/tailwindlabs/tailwindcss-intellisense/blob/master/packages/tailwindcss-language-service/src/util/isObject.ts
@@ -141,15 +142,22 @@ function getUserLanguages(folder?: WorkspaceFolder): Record<string, string> {
 }
 
 export async function activate(context: ExtensionContext) {
-  let module = context.asAbsolutePath(
-    join(
-      "node_modules",
-      "@tailwindcss",
-      "language-server",
-      "bin",
-      "tailwindcss-language-server"
-    )
-  );
+  let module = getConfigCustomServerPath();
+  if (module) {
+    if (existsSync(module)) {
+      module = module;
+    }
+  } else {
+    module = context.asAbsolutePath(
+      join(
+        "node_modules",
+        "@tailwindcss",
+        "language-server",
+        "bin",
+        "tailwindcss-language-server"
+      )
+    );
+  }
 
   let outputChannel: OutputChannel = Workspace.createOutputChannel(
     'tailwindcss-language-server'
@@ -296,4 +304,8 @@ export function deactivate(): Thenable<void> {
     }
   }
   return Promise.all(promises).then(() => undefined)
+}
+
+function getConfigCustomServerPath() {
+  return workspace.getConfiguration("tailwindCSS").get<string>("custom.serverPath", "");
 }

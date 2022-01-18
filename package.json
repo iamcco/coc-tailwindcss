@@ -66,6 +66,11 @@
           ],
           "description": "Trace level of tailwindCSS language server"
         },
+        "tailwindCSS.custom.serverPath": {
+          "type": "string",
+          "default": "",
+          "description": "Custom path to server module. If there is no setting, the built-in module will be used"
+        },
         "tailwindCSS.emmetCompletions": {
           "type": "boolean",
           "default": false,
