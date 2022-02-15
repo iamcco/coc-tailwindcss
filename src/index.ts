@@ -143,10 +143,8 @@ function getUserLanguages(folder?: WorkspaceFolder): Record<string, string> {
 
 export async function activate(context: ExtensionContext) {
   let module = getConfigCustomServerPath();
-  if (module) {
-    if (existsSync(module)) {
-      module = module;
-    }
+  if (module && existsSync(module)) {
+    module = module;
   } else {
     module = context.asAbsolutePath(
       join(
