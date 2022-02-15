@@ -27,11 +27,22 @@
     "autocomplete"
   ],
   "activationEvents": [
-    "*"
+    "workspaceContains:**/tailwind.js",
+    "workspaceContains:**/tailwind.cjs",
+    "workspaceContains:**/tailwind.config.js",
+    "workspaceContains:**/tailwind.config.cjs",
+    "workspaceContains:**/tailwind-config.js",
+    "workspaceContains:**/tailwind-config.cjs",
+    "workspaceContains:**/.tailwindrc.js",
+    "workspaceContains:**/.tailwindrc.cjs"
   ],
   "main": "./out/index.js",
   "contributes": {
     "commands": [
+      {
+        "command": "tailwindCSS.showOutput",
+        "title": "Tailwind CSS: Show Output"
+      },
       {
         "command": "tailwindCSS.headwind.sortTailwindClasses",
         "title": "Headwind: Sort Tailwind CSS Classes"
@@ -55,65 +66,164 @@
           ],
           "description": "Trace level of tailwindCSS language server"
         },
+        "tailwindCSS.custom.serverPath": {
+          "type": "string",
+          "default": "",
+          "description": "Custom path to server module. If there is no setting, the built-in module will be used"
+        },
         "tailwindCSS.emmetCompletions": {
           "type": "boolean",
           "default": false,
-          "description": "Enable class name completions for Emmet-style syntax"
+          "description": "Enable class name completions when using Emmet-style syntax, for example `div.bg-red-500.uppercase`"
         },
-        "tailwindCSS.cssLanguages": {
-          "type": "array",
-          "default": [
-            "css",
-            "less",
-            "postcss",
-            "sass",
-            "scss",
-            "stylus",
-            "vue"
-          ],
-          "description": "css languages"
+        "tailwindCSS.includeLanguages": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "default": {
+            "eelixir": "html",
+            "elixir": "html",
+            "eruby": "html",
+            "htmldjango": "html",
+            "html.twig": "html"
+          },
+          "markdownDescription": "Enable features in languages that are not supported by default. Add a mapping here between the new language and an already supported language.\n E.g.: `{\"plaintext\": \"html\"}`"
         },
-        "tailwindCSS.jsLanguages": {
+        "tailwindCSS.files.exclude": {
           "type": "array",
+          "items": {
+            "type": "string"
+          },
           "default": [
-            "javascript",
-            "javascriptreact",
-            "reason",
-            "typescriptreact"
+            "**/.git/**",
+            "**/node_modules/**",
+            "**/.hg/**"
           ],
-          "description": "javascript languages"
+          "markdownDescription": "Configure glob patterns to exclude from all IntelliSense features. Inherits all glob patterns from the `#files.exclude#` setting."
         },
-        "tailwindCSS.htmlLanguages": {
+        "tailwindCSS.classAttributes": {
           "type": "array",
+          "items": {
+            "type": "string"
+          },
           "default": [
-            "blade",
-            "edge",
-            "eelixir",
-            "ejs",
-            "elixir",
-            "elm",
-            "erb",
-            "eruby",
-            "haml",
-            "handlebars",
-            "html",
-            "htmldjango",
-            "HTML (EEx)",
-            "HTML (Eex)",
-            "html.twig",
-            "jade",
-            "leaf",
-            "markdown",
-            "njk",
-            "nunjucks",
-            "php",
-            "razor",
-            "slim",
-            "svelte",
-            "twig",
-            "vue"
+            "class",
+            "className",
+            "ngClass"
           ],
-          "description": "html languages"
+          "markdownDescription": "The HTML attributes for which to provide class completions, hover previews, linting etc."
+        },
+        "tailwindCSS.colorDecorators": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Controls whether the editor should render inline color decorators for Tailwind CSS classes and helper functions.",
+          "scope": "language-overridable"
+        },
+        "tailwindCSS.validate": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Enable linting. Rules can be configured individually using the `tailwindcss.lint.*` settings",
+          "scope": "language-overridable"
+        },
+        "tailwindCSS.lint.cssConflict": {
+          "type": "string",
+          "enum": [
+            "ignore",
+            "warning",
+            "error"
+          ],
+          "default": "warning",
+          "markdownDescription": "Class names on the same HTML element which apply the same CSS property or properties",
+          "scope": "language-overridable"
+        },
+        "tailwindCSS.lint.invalidApply": {
+          "type": "string",
+          "enum": [
+            "ignore",
+            "warning",
+            "error"
+          ],
+          "default": "error",
+          "markdownDescription": "Unsupported use of the [`@apply` directive](https://tailwindcss.com/docs/functions-and-directives/#apply)",
+          "scope": "language-overridable"
+        },
+        "tailwindCSS.lint.invalidScreen": {
+          "type": "string",
+          "enum": [
+            "ignore",
+            "warning",
+            "error"
+          ],
+          "default": "error",
+          "markdownDescription": "Unknown screen name used with the [`@screen` directive](https://tailwindcss.com/docs/functions-and-directives/#screen)",
+          "scope": "language-overridable"
+        },
+        "tailwindCSS.lint.invalidVariant": {
+          "type": "string",
+          "enum": [
+            "ignore",
+            "warning",
+            "error"
+          ],
+          "default": "error",
+          "markdownDescription": "Unknown variant name used with the [`@variants` directive](https://tailwindcss.com/docs/functions-and-directives/#variants)",
+          "scope": "language-overridable"
+        },
+        "tailwindCSS.lint.invalidConfigPath": {
+          "type": "string",
+          "enum": [
+            "ignore",
+            "warning",
+            "error"
+          ],
+          "default": "error",
+          "markdownDescription": "Unknown or invalid path used with the [`theme` helper](https://tailwindcss.com/docs/functions-and-directives/#theme)",
+          "scope": "language-overridable"
+        },
+        "tailwindCSS.lint.invalidTailwindDirective": {
+          "type": "string",
+          "enum": [
+            "ignore",
+            "warning",
+            "error"
+          ],
+          "default": "error",
+          "markdownDescription": "Unknown value used with the [`@tailwind` directive](https://tailwindcss.com/docs/functions-and-directives/#tailwind)",
+          "scope": "language-overridable"
+        },
+        "tailwindCSS.lint.recommendedVariantOrder": {
+          "type": "string",
+          "enum": [
+            "ignore",
+            "warning",
+            "error"
+          ],
+          "default": "warning",
+          "markdownDescription": "Class variants not in the recommended order (applies in [JIT mode](https://tailwindcss.com/docs/just-in-time-mode) only)",
+          "scope": "language-overridable"
+        },
+        "tailwindCSS.experimental.classRegex": {
+          "type": "array",
+          "scope": "language-overridable"
+        },
+        "tailwindCSS.showPixelEquivalents": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Show `px` equivalents for `rem` CSS values."
+        },
+        "tailwindCSS.rootFontSize": {
+          "type": "number",
+          "default": 16,
+          "markdownDescription": "Root font size in pixels. Used to convert `rem` CSS values to their `px` equivalents. See `#tailwindCSS.showPixelEquivalents#`."
+        },
+        "tailwindCSS.inspectPort": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "default": null,
+          "markdownDescription": "Enable the Node.js inspector agent for the language server and listen on the specified port."
         },
         "tailwindCSS.headwind.defaultSortOrder": {
           "type": "array",
@@ -1354,6 +1464,7 @@
     "prepare": "npm-run-all clean build"
   },
   "dependencies": {
+    "@tailwindcss/language-server": "^0.0.7",
     "rustywind": "^0.6.5"
   },
   "devDependencies": {

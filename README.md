@@ -29,26 +29,21 @@ tailwind init
 
 ## Settings
 
-- `tailwindCSS.trace.server` Trace level of tailwindCSS language server, default: `off`
-- `tailwindCSS.emmetCompletions` Enable class name completions for Emmet-style syntax, default: `false`
-- `tailwindCSS.cssLanguages` css languages completion support, default:
-
-  ``` jsonc
-  [ "css", "less", "postcss", "sass", "scss", "stylus", "vue" ]
-  ```
-
-- `tailwindCSS.jsLanguages` javascript languages completion support, default:
-
-  ``` jsonc
-  [ "javascript", "javascriptreact", "reason", "typescriptreact" ]
-  ```
-
-- `tailwindCSS.htmlLanguages` html languages completion support, default:
-
-  ``` jsonc
-  [ "blade", "edge", "eelixir", "ejs", "elixir", "elm", "erb", "eruby", "haml", "handlebars", "htmldjango", "html", "HTML (EEx)", "HTML (Eex)", "html.twig", "jade", "leaf", "markdown", "njk", "nunjucks", "php", "razor", "slim", "svelte", "twig", "vue" ]
-  ```
-
+- `tailwindCSS.trace.server`: Trace level of tailwindCSS language server, default: `off`
+- `tailwindCSS.custom.serverPath`: Custom path to server module. If there is no setting, the built-in module will be used, default: `""`
+- `tailwindCSS.emmetCompletions`: Enable class name completions when using Emmet-style syntax, for example `div.bg-red-500.uppercase`, default: `false`
+- `tailwindCSS.includeLanguages`: Enable features in languages that are not supported by default. Add a mapping here between the new language and an already supported language. E.g.: `{"plaintext": "html"}`, default: `{ "eelixir": "html", "elixir": "html", "eruby": "html", "htmldjango": "html", "html.twig": "html" }`
+- `tailwindCSS.files.exclude`: Configure glob patterns to exclude from all IntelliSense features. Inherits all glob patterns from the `#files.exclude#` setting, default: ["**/.git/**", "**/node_modules/**", "**/.hg/**"]
+- `tailwindCSS.classAttributes`: The HTML attributes for which to provide class completions, hover previews, linting etc, default: `["class", "className", "ngClass"]`
+- `tailwindCSS.validate`: Enable linting. Rules can be configured individually using the `tailwindcss.lint.*` settings, default: `true`
+- `tailwindCSS.lint.cssConflict`: Class names on the same HTML element which apply the same CSS property or properties, valid option ["ignore", "warning", "error"], default: `warning`
+- `tailwindCSS.lint.invalidApply`: Unsupported use of the [`@apply` directive](https://tailwindcss.com/docs/functions-and-directives/#apply), valid option ["ignore", "warning", "error"], default: `error`
+- `tailwindCSS.lint.invalidScreen`: Unknown screen name used with the [`@screen` directive](https://tailwindcss.com/docs/functions-and-directives/#screen), valid option ["ignore", "warning", "error"], default: `error`
+- `tailwindCSS.lint.invalidVariant`: Unknown variant name used with the [`@variants` directive](https://tailwindcss.com/docs/functions-and-directives/#variants), valid option ["ignore", "warning", "error"], default: `error`
+- `tailwindCSS.lint.invalidConfigPath`: Unknown or invalid path used with the [`theme` helper](https://tailwindcss.com/docs/functions-and-directives/#theme), valid option ["ignore", "warning", "error"], default: `error`
+- `tailwindCSS.lint.invalidTailwindDirective`: Unknown value used with the [`@tailwind` directive](https://tailwindcss.com/docs/functions-and-directives/#tailwind), valid option ["ignore", "warning", "error"], default: `error`
+- `tailwindCSS.lint.recommendedVariantOrder`: Class variants not in the recommended order (applies in [JIT mode](https://tailwindcss.com/docs/just-in-time-mode) only), valid option ["ignore", "warning", "error"], default: `error`
+- `tailwindCSS.inspectPort`: Enable the Node.js inspector agent for the language server and listen on the specified port, default: `null`
 
 ## Features
 

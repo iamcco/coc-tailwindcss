@@ -30,6 +30,11 @@
     "@nodelib/fs.scandir" "2.1.2"
     fastq "^1.6.0"
 
+"@tailwindcss/language-server@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@tailwindcss/language-server/-/language-server-0.0.7.tgz#f8c3c662569132b7a6a3af1732fce3127cce72b7"
+  integrity sha512-4N/MwW91BjMr1BHF3ywXlYOaoYsFWV77hO+xXMEGxBxBNdOJRawvS5fHxUSmfNMXyqR7l2F5PlzKiFZ7QJgXDg==
+
 "@types/node@^11.13.5":
   version "11.13.11"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-11.13.11.tgz#65766752cbbe198ff353ea861a23b6484cf33df4"
